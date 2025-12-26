@@ -1,0 +1,48 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Pokedex App",
+  "homepage": "https://github.com/Fievel90/Pokedex#readme",
+  "bugs": {
+    "url": "https://github.com/Fievel90/Pokedex/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fievel90/Pokedex.git"
+  },
+  "license": "MIT",
+  "author": "Filippo Andrighetti",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src --ext ts",
+    "lint:fix": "eslint src --ext ts --fix",
+    "build": "tsc --noEmit false && tsc-alias",
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts",
+    "start": "node dist/src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.0.3",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.5.0",
+    "jest": "^30.2.0",
+    "jiti": "^2.6.1",
+    "prettier": "^3.7.4",
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.50.1"
+  }
+}
