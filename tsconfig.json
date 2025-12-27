@@ -30,6 +30,7 @@
     "noUncheckedSideEffectImports": true,
     "skipLibCheck": true,
     "noEmit": true,
+    "resolveJsonModule": true,
     "paths": {
       "@Application/*": [
         "./src/Application/*"

@@ -1,7 +1,7 @@
 import { MonitorInterface } from "@Application/Shared/Monitoring/MonitorInterface";
 
-export const Monitor: MonitorInterface = {
-    trackEvent: (event: unknown) => {
+export class Monitor implements MonitorInterface {
+    trackEvent(event: unknown) {
         console.log('Event tracked:', event);
-    },
-};
+    }
+}
