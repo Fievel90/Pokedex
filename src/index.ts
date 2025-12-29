@@ -1,16 +1,9 @@
-import express, { Request, Response } from 'express';
+import app from './app';
 import config from '@Infrastructure/Environments/config';
 import { Logger } from '@Infrastructure/Monitoring/Logger';
-import { Monitor } from '@Infrastructure/Monitoring/Monitor';
 
-const app = express();
 const port = config.server.port;
 
-app.get('/', (_: Request, res: Response) => {
-    new Monitor().trackEvent('Hello World!');
-    res.send('Hello World!');
-});
-
 app.listen(port, () => {
-    new Logger().info(`${config.app.name} is running on http://localhost:${String(port)}`);
+    new Logger(config.logger.level).info(`${config.app.name} is running on http://localhost:${String(port)}`);
 });

@@ -63,6 +63,13 @@ describe('HttpClient', () => {
         expect(result.error).toBeInstanceOf(ValidationError);
     });
 
+    it('should return a validation error if Pokemon name is empty', async () => {
+        const result = await service.getPokemon('');
+
+        expect(result.success).toBe(false);
+        expect(result.error).toBeInstanceOf(ValidationError);
+    });
+
     it('should return an http error if Pokemon is not found', async () => {
         mockFetch.mockResolvedValue({
             ok: false,

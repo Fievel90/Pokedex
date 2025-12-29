@@ -9,6 +9,9 @@ shell:
 run:
 	docker run --rm -p 3000:3000 -v $(PWD):/app -w /app $(BASE_IMAGE) npm run dev
 
+test:
+	docker run --rm -v $(PWD):/app -w /app $(BASE_IMAGE) npm test
+
 build:
 	docker build -t $(PROD_IMAGE) -f .docker/Dockerfile --progress plain .
 

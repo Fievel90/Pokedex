@@ -11,8 +11,19 @@ export class HttpClient implements ClientInterface {
 
     constructor(private readonly logger: LoggerInterface) { }
 
-    async getPokemon(name: string): Promise<Result<HttpError, Pokemon>> {
+    async getPokemon(name: string): Promise<Result<Error, Pokemon>> {
         this.logger.info(`Fetching pokemon`, { name });
+
+        if (!name) {
+            this.logger.error(`Name is required`, {
+                name,
+            });
+
+            return {
+                success: false,
+                error: new ValidationError('Name is required'),
+            };
+        }
 
         const response = await fetch(`${this.baseUrl}/${name.toLowerCase()}`);
 
@@ -23,16 +34,9 @@ export class HttpClient implements ClientInterface {
                 body: await response.text(),
             });
 
-            if (response.status === 404) {
-                return {
-                    success: false,
-                    error: new HttpError(`Pokemon '${name}' not found`),
-                };
-            }
-
             return {
                 success: false,
-                error: new HttpError(`Failed to fetch pokemon '${name}'`),
+                error: new HttpError(response.status, `Failed to fetch pokemon '${name}'`),
             };
         }
 

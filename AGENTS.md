@@ -32,3 +32,39 @@ The overriding rule that makes this architecture work is the **Dependency Rule**
 
 - **`src/index.ts`**: The entry point of the application. It bootstraps the infrastructure (e.g., starts the Express server).
 - **Shared Kernel**: Common utilities and types that can be used across layers (be careful not to couple layers tightly with this).
+
+## Development Environment
+
+### Running Locally
+
+To run the application locally without Docker:
+
+```bash
+npm run dev
+```
+
+To run the test suite:
+
+```bash
+npm test
+```
+
+### Running with Docker
+
+To run the application using Docker (recommended for consistency):
+
+```bash
+make run
+```
+
+To build and run the production image:
+
+```bash
+make run-prod
+```
+
+To run the test suite inside docker:
+
+```bash
+make test
+```

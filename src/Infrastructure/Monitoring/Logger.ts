@@ -1,7 +1,13 @@
 import { LoggerInterface } from "@Application/Shared/Monitoring/LoggerInterface";
 
+export type LoggerLevels = 'debug' | 'info' | 'warn' | 'error';
+
+export const isLoggerLevel = (level: string): level is LoggerLevels => {
+    return ['debug', 'info', 'warn', 'error'].includes(level);
+}
+
 export class Logger implements LoggerInterface {
-    private readonly levelsMap = {
+    private readonly levelsMap: Record<LoggerLevels, number> = {
         debug: 1,
         info: 2,
         warn: 3,
@@ -9,7 +15,7 @@ export class Logger implements LoggerInterface {
     };
 
 
-    constructor(private readonly level: keyof typeof this.levelsMap = 'info') { }
+    constructor(private readonly level: LoggerLevels = 'info') { }
 
     debug(message: string, context: Record<string, unknown> = {}) {
         if (this.levelsMap[this.level] <= this.levelsMap.debug) {
