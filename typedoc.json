@@ -1,0 +1,15 @@
+{
+    "entryPoints": [
+        "src"
+    ],
+    "entryPointStrategy": "expand",
+    "out": "docs",
+    "readme": "README.md",
+    "exclude": [
+        "**/*.test.ts",
+        "**/*.spec.ts"
+    ],
+    "plugin": [
+        "typedoc-plugin-markdown"
+    ]
+}

@@ -17,10 +17,21 @@ interface LoggerConfig {
     level: LoggerLevels;
 }
 
+interface PokemonClientConfig {
+    baseUrl: string;
+}
+
+interface TranslatorClientConfig {
+    baseUrl: string;
+    apiKey: string;
+}
+
 interface Config {
     server: ServerConfig;
     app: AppConfig;
     logger: LoggerConfig;
+    pokemonClient: PokemonClientConfig;
+    translatorClient: TranslatorClientConfig;
 }
 
 const logLevel = process.env['LOGGER_LEVEL'] ?? 'info';
@@ -36,6 +47,13 @@ const config: Config = {
     },
     logger: {
         level: isLoggerLevel(logLevel) ? logLevel : 'info',
+    },
+    pokemonClient: {
+        baseUrl: process.env['POKEMON_API_BASE_URL'] ?? '',
+    },
+    translatorClient: {
+        baseUrl: process.env['TRANSLATOR_API_BASE_URL'] ?? '',
+        apiKey: process.env['TRANSLATOR_API_KEY'] ?? '',
     }
 };
 

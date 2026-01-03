@@ -1,8 +1,13 @@
 node_modules
 npm-debug.log
-Dockerfile
+.docker
 .dockerignore
 .git
 .gitignore
+.github
+coverage
+docs
+tests
 README.md
+AGENTS.md
 LICENSE

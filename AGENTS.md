@@ -68,3 +68,5 @@ To run the test suite inside docker:
 ```bash
 make test
 ```
+
+*Note: prefer running all commands using Docker.*

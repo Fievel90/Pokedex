@@ -1,4 +1,6 @@
 import { LoggerInterface } from "@Application/Shared/Monitoring/LoggerInterface";
+import { TracingStore } from "@Infrastructure/Http/Middlewares/TracingMiddleware";
+import { AsyncLocalStorage } from "async_hooks";
 
 export type LoggerLevels = 'debug' | 'info' | 'warn' | 'error';
 
@@ -15,29 +17,42 @@ export class Logger implements LoggerInterface {
     };
 
 
-    constructor(private readonly level: LoggerLevels = 'info') { }
+    constructor(
+        private readonly level: LoggerLevels = 'info',
+        private readonly asyncLocalStorage: AsyncLocalStorage<TracingStore>
+    ) { }
 
     debug(message: string, context: Record<string, unknown> = {}) {
         if (this.levelsMap[this.level] <= this.levelsMap.debug) {
-            console.debug(message, context);
+            console.debug(`[DEBUG] ${message}`, this.addTracingContext(context));
         }
     }
 
     info(message: string, context: Record<string, unknown> = {}) {
         if (this.levelsMap[this.level] <= this.levelsMap.info) {
-            console.log(message, context);
+            console.log(`[INFO] ${message}`, this.addTracingContext(context));
         }
     }
 
     warn(message: string, context: Record<string, unknown> = {}) {
         if (this.levelsMap[this.level] <= this.levelsMap.warn) {
-            console.warn(message, context);
+            console.warn(`[WARN] ${message}`, this.addTracingContext(context));
         }
     }
 
     error(message: string, context: Record<string, unknown> = {}) {
         if (this.levelsMap[this.level] <= this.levelsMap.error) {
-            console.error(message, context);
+            console.error(`[ERROR] ${message}`, this.addTracingContext(context));
         }
+    }
+
+    private addTracingContext(context: Record<string, unknown>) {
+        const tracingStore = this.asyncLocalStorage.getStore();
+
+        return {
+            ...context,
+            correlationId: tracingStore?.correlationId,
+            transactionId: tracingStore?.transactionId,
+        };
     }
 }

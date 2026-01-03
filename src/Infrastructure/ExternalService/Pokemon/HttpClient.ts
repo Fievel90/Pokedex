@@ -5,9 +5,10 @@ import { HttpError } from '@Domain/Errors/HttpError';
 import { PokemonSpecies } from '@Infrastructure/ExternalService/Pokemon/types';
 import { ValidationError } from '@Domain/Errors/ValidationError';
 import { LoggerInterface } from '@Application/Shared/Monitoring/LoggerInterface';
+import config from '@Infrastructure/Environments/config';
 
 export class HttpClient implements ClientInterface {
-    private readonly baseUrl = 'https://pokeapi.co/api/v2/pokemon-species';
+    private readonly baseUrl = config.pokemonClient.baseUrl;
 
     constructor(private readonly logger: LoggerInterface) { }
 
@@ -25,7 +26,20 @@ export class HttpClient implements ClientInterface {
             };
         }
 
-        const response = await fetch(`${this.baseUrl}/${name.toLowerCase()}`);
+        let response: Response;
+        try {
+            response = await fetch(`${this.baseUrl}/${name.toLowerCase()}`);
+        } catch (error) {
+            this.logger.error(`Failed to fetch pokemon`, {
+                name,
+                body: error,
+            });
+
+            return {
+                success: false,
+                error: new HttpError(500, `Failed to fetch pokemon '${name}'`),
+            };
+        }
 
         if (!response.ok) {
             this.logger.error(`Failed to fetch pokemon`, {
@@ -55,10 +69,8 @@ export class HttpClient implements ClientInterface {
                 error: new ValidationError(result.error.message),
             };
         } else {
-            this.logger.info(`Pokemon fetched successfully`, {
-                name,
-                body: data,
-            });
+            this.logger.info(`Pokemon fetched successfully`, { name });
+            this.logger.debug(`Pokemon fetched successfully: body`, { name, body: data });
 
             return {
                 success: true,

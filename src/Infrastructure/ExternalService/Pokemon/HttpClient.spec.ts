@@ -2,7 +2,15 @@ import { HttpClient } from './HttpClient';
 import { Pokemon } from '../../../Domain/ValueObjects/Pokemon';
 import { HttpError } from '../../../Domain/Errors/HttpError';
 import { ValidationError } from '../../../Domain/Errors/ValidationError';
-import { Logger } from '../../../Infrastructure/Monitoring/Logger';
+import { LoggerInterface } from '../../../Application/Shared/Monitoring/LoggerInterface';
+
+// Mock LoggerInterface
+const mockLogger: jest.Mocked<LoggerInterface> = {
+    debug: jest.fn(),
+    info: jest.fn(),
+    warn: jest.fn(),
+    error: jest.fn(),
+};
 
 const mockFetch = jest.fn();
 global.fetch = mockFetch;
@@ -11,7 +19,7 @@ describe('HttpClient', () => {
     let service: HttpClient;
 
     beforeEach(() => {
-        service = new HttpClient(new Logger());
+        service = new HttpClient(mockLogger);
         mockFetch.mockClear();
     });
 

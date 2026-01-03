@@ -1,4 +1,4 @@
-name: Pokedex CI
+name: Tests
 
 on:
   push:
