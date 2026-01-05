@@ -4,4 +4,4 @@ showGroups: true
 ---
 # Test Coverage
 
-The test coverage for the project can be found [here](./lcov-report/index.html).
+The test coverage for the project can be found [here](https://fievel90.github.io/Pokedex/lcov-report/index.html).

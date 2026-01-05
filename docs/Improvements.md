@@ -15,7 +15,9 @@ A message bus can be introduced, refactoring the logic present in the commands/q
 The project is already structured to facilitate the implementation of KPI monitoring.
 The exported interface `src/Application/Shared/Monitoring/MonitorInterface.ts` can be used to implement a monitoring system and track the performance of the application, of the external services and any other business KPIs.
 
-## GDPR Compliance
+For example it would be possible to monitor the performance of the Pokemon API, including the response time and the status code of the requests, in order to be proactive in case of issues and implement a circuit breaker.
+
+## GDPR Compliance & Retention Policy
 
 *Not applicable to this project.*
 

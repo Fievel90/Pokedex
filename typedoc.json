@@ -10,7 +10,8 @@
     "projectDocuments": [
         "docs/Architecture.md",
         "docs/Improvements.md",
-        "docs/Openapi.md"
+        "docs/Openapi.md",
+        "docs/Test-Coverage.md"
     ],
     "exclude": [
         "**/*.test.ts",
