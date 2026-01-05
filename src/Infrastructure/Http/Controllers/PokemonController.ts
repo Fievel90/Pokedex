@@ -8,6 +8,9 @@ import { HttpError } from '@Domain/Errors/HttpError';
 import { ValidationError } from '@Domain/Errors/ValidationError';
 import { Result } from '@Domain/Types/Result';
 
+/**
+ * Controller for handling Pokemon-related HTTP requests
+ */
 export class PokemonController {
     constructor(
         private readonly logger: LoggerInterface,
@@ -15,6 +18,11 @@ export class PokemonController {
         private readonly translatedHandler: GetTranslatedPokemonQueryHandler
     ) { }
 
+    /**
+     * Handles requests to get a single Pokemon by name
+     * @param req The Express request object, expected to contain the Pokemon name in params
+     * @param res The Express response object
+     */
     async getOne(req: Request, res: Response): Promise<void> {
         const { name } = req.params;
 
@@ -32,6 +40,11 @@ export class PokemonController {
         this.handleResult(res, result, name);
     }
 
+    /**
+     * Handles requests to get a single Pokemon with translated description
+     * @param req The Express request object, expected to contain the Pokemon name in params
+     * @param res The Express response object
+     */
     async getTranslated(req: Request, res: Response): Promise<void> {
         const { name } = req.params;
 
@@ -57,6 +70,12 @@ export class PokemonController {
         this.handleResult(res, result, name);
     }
 
+    /**
+     * Handles the result of a Pokemon query and sends the appropriate response
+     * @param res The Express response object
+     * @param result The result of the query
+     * @param name The name of the Pokemon involved in the request
+     */
     private handleResult(res: Response, result: Result<Error, unknown>, name: string): void {
         if (result.success) {
             this.logger.info(`Pokemon request successful`, { name });

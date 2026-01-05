@@ -10,6 +10,9 @@ const FlavorText = z.object({
     language: NamedAPIResource,
 });
 
+/**
+ * Zod schema for validating Pokemon species data from the API
+ */
 export const PokemonSpecies = z.object({
     id: z.number(),
     name: z.string(),
@@ -18,4 +21,7 @@ export const PokemonSpecies = z.object({
     flavor_text_entries: z.array(FlavorText),
 });
 
+/**
+ * Type definition for Pokemon species data, inferred from the Zod schema
+ */
 export type PokemonSpecies = z.infer<typeof PokemonSpecies>;

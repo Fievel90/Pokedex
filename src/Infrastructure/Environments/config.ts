@@ -26,6 +26,9 @@ interface TranslatorClientConfig {
     apiKey: string;
 }
 
+/**
+ * Configuration interface for the application
+ */
 interface Config {
     server: ServerConfig;
     app: AppConfig;
@@ -36,6 +39,9 @@ interface Config {
 
 const logLevel = process.env['LOGGER_LEVEL'] ?? 'info';
 
+/**
+ * Application configuration object
+ */
 const config: Config = {
     server: {
         port: Number(process.env['PORT'] ?? 3000),

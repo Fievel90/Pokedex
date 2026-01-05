@@ -7,11 +7,19 @@ import { ValidationError } from '@Domain/Errors/ValidationError';
 import { LoggerInterface } from '@Application/Shared/Monitoring/LoggerInterface';
 import config from '@Infrastructure/Environments/config';
 
+/**
+ * HTTP client for communicating with the Pokemon API
+ */
 export class HttpClient implements ClientInterface {
     private readonly baseUrl = config.pokemonClient.baseUrl;
 
     constructor(private readonly logger: LoggerInterface) { }
 
+    /**
+     * Retrieves Pokemon data from the external API
+     * @param name The name of the Pokemon to retrieve
+     * @returns A promise resolving to a Result containing either the Pokemon data or an Error
+     */
     async getPokemon(name: string): Promise<Result<Error, Pokemon>> {
         this.logger.info(`Fetching pokemon`, { name });
 
@@ -79,6 +87,11 @@ export class HttpClient implements ClientInterface {
         }
     }
 
+    /**
+     * Maps the API response to the Pokemon domain object
+     * @param data The raw data from the API
+     * @returns A Pokemon domain object
+     */
     private mapToPokemon(data: PokemonSpecies): Pokemon {
         const descriptionEntry = data.flavor_text_entries.find(
             (entry) => entry.language.name === 'en'

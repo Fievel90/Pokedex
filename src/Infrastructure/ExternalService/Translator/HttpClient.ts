@@ -6,11 +6,20 @@ import { LoggerInterface } from '@Application/Shared/Monitoring/LoggerInterface'
 import { TranslationResponseSchema } from './types';
 import config from '@Infrastructure/Environments/config';
 
+/**
+* HTTP client for communicating with the Translation API
+*/
 export class HttpClient implements ClientInterface {
     private readonly baseUrl = config.translatorClient.baseUrl;
 
     constructor(private readonly logger: LoggerInterface) { }
 
+    /**
+     * Retrieves a translation for the given text
+     * @param translationType The type of translation to use (e.g., 'yoda', 'shakespeare')
+     * @param text The text to translate
+     * @returns A promise resolving to a Result containing either the translated text or an Error
+     */
     async getTranslation(translationType: string, text: string): Promise<Result<Error, string>> {
         this.logger.info(`Fetching translation`, { translationType, text });
 

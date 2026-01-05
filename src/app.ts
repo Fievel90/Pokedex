@@ -34,4 +34,7 @@ app.get('/pokemon/translated/:name', (req, res) => {
     return pokemonController.getTranslated(req, res);
 });
 
+/**
+ * The Express application instance
+ */
 export default app
