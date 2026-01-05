@@ -26,10 +26,48 @@ app.get('/', (_, res) => {
     res.send('Hello World!');
 });
 
+/**
+ * @openapi
+ * /pokemon/{name}:
+ *   get:
+ *     description: Get a pokemon by name
+ *     parameters:
+ *       - name: name
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns a pokemon.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pokemon'
+ */
 app.get('/pokemon/:name', (req, res) => {
     return pokemonController.getOne(req, res);
 });
 
+/**
+ * @openapi
+ * /pokemon/translated/{name}:
+ *   get:
+ *     description: Get a pokemon by name with translated description
+ *     parameters:
+ *       - name: name
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns a pokemon.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pokemon'
+ */
 app.get('/pokemon/translated/:name', (req, res) => {
     return pokemonController.getTranslated(req, res);
 });

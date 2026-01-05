@@ -9,14 +9,16 @@
     "readme": "README.md",
     "projectDocuments": [
         "docs/Architecture.md",
-        "docs/Improvements.md"
+        "docs/Improvements.md",
+        "docs/Openapi.md"
     ],
     "exclude": [
         "**/*.test.ts",
         "**/*.spec.ts"
     ],
     "plugin": [
-        "typedoc-plugin-mermaid"
+        "typedoc-plugin-mermaid",
+        "typedoc-plugin-zod"
     ],
     "navigation": {
         "includeCategories": true,

@@ -1,4 +1,24 @@
 /**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Pokemon:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the Pokemon
+ *         description:
+ *           type: string
+ *           description: The description of the Pokemon
+ *         habitat:
+ *           type: string
+ *           description: The habitat of the Pokemon
+ *         isLegendary:
+ *           type: boolean
+ *           description: Whether the Pokemon is legendary
+ */
+/**
  * Value object representing a Pokemon
  */
 export class Pokemon {
